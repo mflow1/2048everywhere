@@ -18,9 +18,9 @@ afterEach(() => {
 
 it('renders with custom or default text', () => {
     act(() => {
-        render(<Title text="Custom Title"/>, container);
+        render(<Title text='Custom Title'/>, container);
     });
-    expect(container.textContent).toBe("Custom Title");
+    expect(container.textContent).toBe('Custom Title');
 
     act(() => {
         render(<Title/>, container);
