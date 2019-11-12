@@ -2,7 +2,7 @@
   "name": "2048everywhere",
   "version": "0.1.0",
   "private": true,
-  "main": "public/main.js",
+  "main": "public/electron.js",
   "homepage": "./",
   "dependencies": {
     "react": "^16.10.2",
@@ -24,9 +24,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-start": "npm run build && electron .",
+    "electron-start": "electron .",
     "preelectron-pack": "npm run build",
-    "electron-pack": "electron-builder --c.extraMetadata.main=build/main.js"
+    "electron-pack": "electron-builder --c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": "react-app"
