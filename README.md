@@ -11,6 +11,8 @@ Jest: https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest
 
 This allows you to see passing/failing tests within the workspace and within the open editor. It will run the tests on the fly as you save files.
 
+![](readme_images/JestExample.PNG)
+
 ## Running Web
 To run use the command "npm run start" and the local server will spin up and a web page will be loaded in your default browser.
 
