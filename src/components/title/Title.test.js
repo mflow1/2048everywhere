@@ -1,9 +1,29 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { act } from 'react-dom/test-utils';
 import Title from './Title';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Title />, div);
-  ReactDOM.unmountComponentAtNode(div);
+let container = null;
+
+beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+});
+
+afterEach(() => {
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+});
+
+it('renders with custom or default text', () => {
+    act(() => {
+        render(<Title text="Custom Title"/>, container);
+    });
+    expect(container.textContent).toBe("Custom Title");
+
+    act(() => {
+        render(<Title/>, container);
+    });
+    expect(container.textContent).toBe('2048 Everywhere');
 });
