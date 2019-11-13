@@ -1,5 +1,4 @@
 import GameEngine, { GenerateTileArray } from './GameEngine'
-import { exportAllDeclaration } from '@babel/types';
 
 it('GenerateArray makes a 4x4 Array', () => {
     var array = GenerateTileArray();
