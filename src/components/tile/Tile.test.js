@@ -17,6 +17,13 @@ afterEach(() => {
     container = null;
 });
 
+it('Tile renders without crashing', () => {
+    act(() => {
+        render(<Tile/>, container);
+    });
+});
+
+
 it('renders with custom or default value', () => {
     act(() => {
         render(<Tile value='10'/>, container);

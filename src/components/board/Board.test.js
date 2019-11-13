@@ -2,6 +2,7 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import Board from './Board';
+import { OperationCanceledException } from 'typescript';
 
 let container = null;
 
@@ -16,6 +17,8 @@ afterEach(() => {
     container = null;
 });
 
-it('renders with custom or default text', () => {
-
+it('Board renders without crashing', () => {
+    act(() => {
+        render(<Board/>, container);
+    });
 });

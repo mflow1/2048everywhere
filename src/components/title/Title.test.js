@@ -16,6 +16,12 @@ afterEach(() => {
     container = null;
 });
 
+it('Title renders without crashing', () => {
+    act(() => {
+        render(<Title/>, container);
+    });
+});
+
 it('renders with custom or default text', () => {
     act(() => {
         render(<Title text='Custom Title'/>, container);
