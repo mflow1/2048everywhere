@@ -2,7 +2,6 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import Tile from './Tile';
-import { join } from 'path';
 
 let container = null;
 
@@ -23,8 +22,7 @@ it('Tile renders without crashing', () => {
     });
 });
 
-
-it('renders with custom or default value', () => {
+it('Tile renders with custom or default value', () => {
     act(() => {
         render(<Tile value='10'/>, container);
     });

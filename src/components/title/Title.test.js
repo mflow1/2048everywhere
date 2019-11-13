@@ -22,7 +22,7 @@ it('Title renders without crashing', () => {
     });
 });
 
-it('renders with custom or default text', () => {
+it('Title renders with custom or default text', () => {
     act(() => {
         render(<Title text='Custom Title'/>, container);
     });
