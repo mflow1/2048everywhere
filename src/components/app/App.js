@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../../assets/images/logo.svg';
 import './App.css';
 import Title from '../title/Title';
 import Board from '../board/Board';
