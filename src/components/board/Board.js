@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import './Board.css';
 import {GenerateTileArray} from '../../engine/GameEngine'
 
-function Board() {
+function Board(props) {
     const [tileArray, setTileArray] = useState(GenerateTileArray(4,4))
+
+    if(props.x > 1 && props.y > 1) {
+        setTileArray(GenerateTileArray(props.x,props.y));
+    }
 
     return <div className="Board"> 
         <div> {tileArray[0][0]} {tileArray[1][0]} {tileArray[2][0]} {tileArray[3][0]}</div>
