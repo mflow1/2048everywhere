@@ -4,7 +4,7 @@ import Tile from '../components/tile/Tile';
 export function GenerateTileArray(x,y) {
     //We require a minimum of 2x2
     if (x <= 1 || y <= 1) {
-        throw 'TileArray must be a minimum of 2x2';
+        throw new Error('TileArray must be a minimum of 2x2');
     }
 
     var tileArray = new Array(x);
