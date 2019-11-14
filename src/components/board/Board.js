@@ -3,7 +3,7 @@ import './Board.css';
 import {GenerateTileArray} from '../../engine/GameEngine'
 
 function Board() {
-    const [tileArray, setTileArray] = useState(GenerateTileArray())
+    const [tileArray, setTileArray] = useState(GenerateTileArray(4,4))
 
     return <div className="Board"> 
         <div> {tileArray[0][0]} {tileArray[1][0]} {tileArray[2][0]} {tileArray[3][0]}</div>

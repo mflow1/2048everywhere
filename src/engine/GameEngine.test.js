@@ -1,7 +1,10 @@
 import GameEngine, { GenerateTileArray } from './GameEngine'
 
-it('GenerateArray makes a 4x4 Array', () => {
-    var array = GenerateTileArray();
-    expect(array.length).toBe(4);
-    expect(array[0].length).toBe(4);
+it('GenerateArray makes a n x n Array', () => {
+    var x = Math.floor(Math.random() * 11);
+    var y = Math.floor(Math.random() * 11);
+    var array = GenerateTileArray(x,y);
+    expect(array.length).toBe(x);
+    expect(array[0].length).toBe(y);
 });
+

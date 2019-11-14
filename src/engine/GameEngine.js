@@ -1,16 +1,16 @@
 import React from 'react';
 import Tile from '../components/tile/Tile';
 
-export function GenerateTileArray() {
-    var tileArray = new Array(4);
+export function GenerateTileArray(x,y) {
+    var tileArray = new Array(x);
 
     for (var i = 0; i < tileArray.length; i++) {
-        tileArray[i] = new Array(4);
+        tileArray[i] = new Array(y);
     }
 
-    for (var x = 0; x < 4; x++) {
-        for (var y = 0; y < 4; y++) {
-            tileArray[x][y] = <Tile/>;
+    for (i = 0; i < x; i++) {
+        for (var j = 0; j < y; j++) {
+            tileArray[i][j] = <Tile/>;
         }
     }
 
