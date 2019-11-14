@@ -24,12 +24,12 @@ it('Tile renders without crashing', () => {
 
 it('Tile renders with custom or default value', () => {
     act(() => {
-        render(<Tile value='10'/>, container);
+        render(<Tile tileValue='10'/>, container);
     });
     expect(container.textContent).toBe('10');
 
     act(() => {
         render(<Tile />, container);
     });
-    expect(container.textContent).toBe('0');
+    expect(container.textContent).toBe('');
 });
