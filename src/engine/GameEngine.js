@@ -18,15 +18,3 @@ export function generateGameBoard(x,y) {
 
     return board;
 }
-
-// export function HasTileAbove(tileArray, x, y) {
-//     return (y !== 0);
-// }
-
-// export function TileAboveHasValue(tileArray, x, y) {
-//     return (tileArray[x][y-1].tileValue > 0);
-// }
-
-// export function HasTileBelow(tileArray, x, y) {
-//     return (y !== tileArray[0].length-1);
-// }
