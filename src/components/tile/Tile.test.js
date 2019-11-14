@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import Title from './Title';
+import Tile from './Tile';
 
 let container = null;
 
@@ -16,20 +16,20 @@ afterEach(() => {
     container = null;
 });
 
-it('Title renders without crashing', () => {
+it('Tile renders without crashing', () => {
     act(() => {
-        render(<Title/>, container);
+        render(<Tile/>, container);
     });
 });
 
-it('Title renders with custom or default text', () => {
+it('Tile renders with custom or default value', () => {
     act(() => {
-        render(<Title text='Custom Title'/>, container);
+        render(<Tile tileValue='10'/>, container);
     });
-    expect(container.textContent).toBe('Custom Title');
+    expect(container.textContent).toBe('10');
 
     act(() => {
-        render(<Title/>, container);
+        render(<Tile />, container);
     });
-    expect(container.textContent).toBe('2048 Everywhere');
+    expect(container.textContent).toBe('');
 });

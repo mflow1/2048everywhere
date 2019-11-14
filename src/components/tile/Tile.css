@@ -1,0 +1,9 @@
+.Tile {
+    margin: 1vmin;
+    background-color: white;
+    height: calc(10px + 6vmin);
+    width: calc(10px + 6vmin);
+    font-size: calc(10px + 4vmin);
+    color: black;
+    display: inline-block;
+}

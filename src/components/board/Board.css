@@ -1,0 +1,5 @@
+.Board {
+    align-items: center;
+    font-size: calc(10px + 4vmin);
+    color: white;
+}
