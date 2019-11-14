@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Board.css';
-import {GenerateTileArray} from '../../engine/GameEngine'
+import Tile from '../tile/Tile'
+import { generateGameBoard } from '../../engine/GameEngine'
 
-function Board(props) {
-    const [tileArray, setTileArray] = useState(GenerateTileArray(4,4))
+export default function Board(props) {
+    let tileArray = generateTileArrayFromGameBoard(generateGameBoard(4,4));
 
     if(props.x > 1 && props.y > 1) {
-        setTileArray(GenerateTileArray(props.x,props.y));
+        tileArray = generateGameBoard(props.x,props.y);
     }
 
-    return <div className="Board"> 
-        <div> {tileArray[0][0]} {tileArray[1][0]} {tileArray[2][0]} {tileArray[3][0]}</div>
-        <div> {tileArray[0][1]} {tileArray[1][1]} {tileArray[2][1]} {tileArray[3][1]}</div>
-        <div> {tileArray[0][2]} {tileArray[1][2]} {tileArray[2][2]} {tileArray[3][2]}</div>
-        <div> {tileArray[0][3]} {tileArray[1][3]} {tileArray[2][3]} {tileArray[3][3]}</div>
-    </div>
+    const items = []
+    let rowItems = []
 
+    for (let x = 0; x < tileArray.length; x++) {
+        for (let y = 0; y < tileArray[0].length; y++) {
+            rowItems.push(tileArray[x][y]);
+        }
+        items.push(<div>{rowItems}</div>)
+        rowItems = [];
+    }
+
+    return <div className="Board">{items}</div>
 }
 
-export default Board;
+function generateTileArrayFromGameBoard(board) {
+    let tileArray = new Array(board.length);
+
+    for (var i = 0; i < board.length; i++) {
+        tileArray[i] = new Array(board[0].length);
+    }
+
+    for (let x = 0; x < board.length; x++) {
+        for (let y = 0; y < board[0].length; y++) {
+            tileArray[x][y] = <Tile tileValue={board[x][y]}/>;
+        }
+    }
+    return tileArray;
+}

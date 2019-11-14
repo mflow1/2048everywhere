@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Tile.css';
 
 function Tile(props) {
-    const [tileValue, setTileValue] = useState(0);
-
-    if (props.value) {
-        setTileValue(props.value);
+    if (props.tileValue === 0) {
+        return <div className='Tile'/>
+    } else {
+        return <div className='Tile'>{props.tileValue}</div>
     }
-
-    return <div className='Tile'>{tileValue}</div>
 }
 
 export default Tile;
