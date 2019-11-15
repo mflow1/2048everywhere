@@ -1,3 +1,4 @@
+![Inline docs](https://travis-ci.com/mflow1/2048everywhere.svg?branch=master)
 [![codecov](https://codecov.io/gh/mflow1/2048everywhere/branch/master/graph/badge.svg)](https://codecov.io/gh/mflow1/2048everywhere)
 
 ## 2048 Everywhere
