@@ -1,3 +1,5 @@
+![Inline docs](https://travis-ci.com/mflow1/2048everywhere.svg?branch=master)
+
 ## 2048 Everywhere
 This is a project with the goal of creating a reusable set of code to build, run, and distribute the game 2048 accross the web, Linux, Mac, Windows, Android, and iOS.
 
