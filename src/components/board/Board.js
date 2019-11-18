@@ -17,7 +17,7 @@ export default function Board(props) {
         for (let y = 0; y < tileArray[0].length; y++) {
             rowItems.push(tileArray[x][y]);
         }
-        items.push(<div>{rowItems}</div>)
+        items.push(<div key={x}>{rowItems}</div>)
         rowItems = [];
     }
 
@@ -33,7 +33,7 @@ function generateTileArrayFromGameBoard(board) {
 
     for (let x = 0; x < board.length; x++) {
         for (let y = 0; y < board[0].length; y++) {
-            tileArray[x][y] = <Tile tileValue={board[x][y]}/>;
+            tileArray[x][y] = <Tile key={x.toString() + ' ' + y.toString()} tileValue={board[x][y]}/>;
         }
     }
     return tileArray;
