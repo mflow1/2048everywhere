@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Title from '../title/Title';
 import Board from '../board/Board';
+import { generateGameState } from '../../engine/GameEngine';
 
-function App() {
+export default function App() {
+  const [gameState, setGameState] = useState(generateGameState(4,4));
+  const [gameBoard, setGameBoard] = useState(<Board gameState={gameState}/>);
+
+  useEffect(() => {
+    window.addEventListener('keydown', keyDown)
+  });
+
   return (
     <div className="App">
       <header className="App-header">
         <Title/>
-        <Board/>
+        {gameBoard}
       </header>
     </div>
   );
 }
 
-export default App;
+function keyDown(e) {
+  console.log(e.key)
+}

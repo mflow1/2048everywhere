@@ -1,9 +1,9 @@
-import { generateGameBoard } from './GameEngine'
+import { generateGameState } from './GameEngine'
 
 let tileArray = null;
 
 beforeEach(() => {
-    tileArray = generateGameBoard(4,4);
+    tileArray = generateGameState(4,4);
 });
 
 afterEach(() => {
@@ -15,14 +15,14 @@ describe('GameEngineTests', () => {
         it('generateGameBoard makes a n x n Array when above 2x2', () => {
             var x = Math.floor(Math.random() * 9) + 2;
             var y = Math.floor(Math.random() * 9) + 2;
-            var array = generateGameBoard(x,y);
+            var array = generateGameState(x,y);
             expect(array.length).toBe(x);
             expect(array[0].length).toBe(y);
         });
     
         it('generateGameBoard throws when passed less and 2x2', () => {
             expect(() => {
-                generateGameBoard(1,1);
+                generateGameState(1,1);
             }).toThrow();
         });
     });
