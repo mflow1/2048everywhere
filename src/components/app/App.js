@@ -8,10 +8,6 @@ export default function App() {
   const [gameState, setGameState] = useState(generateGameState(4,4));
   const [gameBoard, setGameBoard] = useState(<Board gameState={gameState}/>);
 
-  useEffect(() => {
-    window.addEventListener('keydown', keyDown)
-  });
-
   return (
     <div className="App">
       <header className="App-header">
@@ -20,8 +16,4 @@ export default function App() {
       </header>
     </div>
   );
-}
-
-function keyDown(e) {
-  console.log(e.key)
 }
