@@ -1,15 +1,5 @@
 import { generateGameState, GameEngine } from './GameEngine'
 
-let tileArray = null;
-
-beforeEach(() => {
-    tileArray = generateGameState(4,4);
-});
-
-afterEach(() => {
-    tileArray = null;
-});
-
 describe('GameEngineTests', () => {
     describe('Constructor tests', ()=> {
         it('constructor makes a n x n Array when above 2x2', () => {
