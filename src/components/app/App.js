@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css';
 import Title from '../title/Title';
 import Board from '../board/Board';
-import { generateGameState } from '../../engine/GameEngine';
+import GameEngine from '../../engine/GameEngine';
 
 export default class App extends React.Component {
   constructor() {
     super();
-    this.gameState = generateGameState(4,4);
-    this.gameBoard = <Board gameState={this.gameState}/>;
+    this.gameEngine = new GameEngine(4,4);
+    this.gameBoard = <Board gameState={this.gameEngine.gameState}/>;
   }
 
   componentDidMount() {
