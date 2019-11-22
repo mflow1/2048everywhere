@@ -28,4 +28,24 @@ export default class GameEngine {
     
         return gameState;
     }
+
+    processUpCommand() {
+        console.log("Up Command");
+    }
+
+    processDownCommand() {
+        console.log("Down Command");
+    }
+
+    processLeftCommand() {
+        console.log("Left Command");
+    }
+
+    processRightCommand() {
+        console.log("Right Command");
+    }
+
+    
+
+    
 }
