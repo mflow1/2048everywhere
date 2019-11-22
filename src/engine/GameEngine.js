@@ -44,8 +44,4 @@ export default class GameEngine {
     processRightCommand() {
         console.log("Right Command");
     }
-
-    
-
-    
 }
