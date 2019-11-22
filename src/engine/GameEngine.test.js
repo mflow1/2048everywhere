@@ -1,4 +1,4 @@
-import { generateGameState, GameEngine } from './GameEngine'
+import GameEngine from './GameEngine'
 
 describe('GameEngineTests', () => {
     describe('Constructor tests', ()=> {
