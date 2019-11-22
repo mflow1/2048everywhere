@@ -2,6 +2,8 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import Board from './Board';
+import { generateGameState } from '../../engine/GameEngine'
+import generate from '@babel/generator';
 
 let container = null;
 
@@ -18,6 +20,6 @@ afterEach(() => {
 
 it('Board renders without crashing', () => {
     act(() => {
-        render(<Board/>, container);
+        render(<Board gameState={generateGameState(4,4)}/>, container);
     });
 });
