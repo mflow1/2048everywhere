@@ -2,7 +2,7 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import Board from './Board';
-import GameEngine, { generateGameState } from '../../engine/GameEngine'
+import GameEngine from '../../engine/GameEngine'
 
 let container = null;
 
