@@ -3,6 +3,8 @@ export default class GameEngine {
         this.height = height;
         this.width = width;
         this.gameState = this.generateGameState();
+
+        //this.processUpCommand = this.processUpCommand.bind(this);
     } 
 
     generateGameState() {
@@ -30,6 +32,11 @@ export default class GameEngine {
     }
 
     processUpCommand() {
+        for (let i = 0; i < this.gameState.length; i++) {
+            for (var j = 0; j < this.gameState[i].length; j++) {
+                this.gameState[i][j]++;
+            }
+        }
         console.log("Up Command");
     }
 

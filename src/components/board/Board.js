@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Board.css';
 import Tile from '../tile/Tile'
 
 export default function Board(props) {
-    const [tileArray, setTileArray] = useState(generateTileArrayFromGameState(props.gameState))
-
-    return <div className="Board">{generateOutputJSXFromTileArray(tileArray)}</div>
+    return <div className="Board">{generateOutputJSXFromTileArray(generateTileArrayFromGameState(props.gameState))}</div>
 }
 
 function generateTileArrayFromGameState(gameState) {
@@ -20,12 +18,14 @@ function generateTileArrayFromGameState(gameState) {
             tileArray[x][y] = <Tile key={x.toString() + ' ' + y.toString()} tileValue={gameState[x][y]}/>;
         }
     }
+    
     return tileArray;
 }
 
 function generateOutputJSXFromTileArray(tileArray) {
     let items = []
     let rowItems = []
+    console.log(tileArray);
 
     for (let x = 0; x < tileArray.length; x++) {
         for (let y = 0; y < tileArray[0].length; y++) {
