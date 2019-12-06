@@ -1,28 +1,21 @@
-import { generateGameState } from './GameEngine'
-
-let tileArray = null;
-
-beforeEach(() => {
-    tileArray = generateGameState(4,4);
-});
-
-afterEach(() => {
-    tileArray = null;
-});
+import GameEngine from './GameEngine'
 
 describe('GameEngineTests', () => {
-    describe('generateGameboard tests', ()=> {
-        it('generateGameBoard makes a n x n Array when above 2x2', () => {
-            var x = Math.floor(Math.random() * 9) + 2;
-            var y = Math.floor(Math.random() * 9) + 2;
-            var array = generateGameState(x,y);
+    describe('Constructor tests', ()=> {
+        it('constructor makes a n x n Array when above 2x2', () => {
+            let x = Math.floor(Math.random() * 9) + 2;
+            let y = Math.floor(Math.random() * 9) + 2;
+
+            let gameEngine = new GameEngine(x, y);
+            let array = gameEngine.gameState;
+            
             expect(array.length).toBe(x);
             expect(array[0].length).toBe(y);
         });
     
-        it('generateGameBoard throws when passed less and 2x2', () => {
+        it('GameEngine constructor throws when passed less and 2x2', () => {
             expect(() => {
-                generateGameState(1,1);
+                let gameEngine = new GameEngine(1,1);
             }).toThrow();
         });
     });

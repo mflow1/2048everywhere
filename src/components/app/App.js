@@ -1,19 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import Title from '../title/Title';
 import Board from '../board/Board';
-import { generateGameState } from '../../engine/GameEngine';
+import GameEngine from '../../engine/GameEngine';
 
-export default function App() {
-  const [gameState, setGameState] = useState(generateGameState(4,4));
-  const [gameBoard, setGameBoard] = useState(<Board gameState={gameState}/>);
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.gameEngine = new GameEngine(4,4);
+    this.gameBoard = <Board gameState={this.gameEngine.gameState}/>;
+  }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Title/>
-        {gameBoard}
-      </header>
-    </div>
-  );
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  };
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown(event) {
+    console.log(event.key);
+    if (event.key === 'ArrowUp') {
+      console.log('processUp()');
+    } else if (event.key === 'ArrowDown') {
+      console.log('processDown()');
+    } else if (event.key === 'ArrowLeft') {
+      console.log('processLeft()');
+    } else if (event.key === 'ArrowRight') {
+      console.log('processRight()');
+    }
+  };
+
+
+  render() {
+    return  <div className="App">
+              <header className="App-header">
+                <Title/>
+                {this.gameBoard}
+              </header>
+            </div>
+  }
 }
