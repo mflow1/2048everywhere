@@ -1,30 +1,25 @@
 export default class GameEngine {
-    constructor(height, width) {
-        this.height = height;
-        this.width = width;
-        this.gameState = this.generateGameState();
-
-        //this.processUpCommand = this.processUpCommand.bind(this);
+    constructor(rowCount, columnCount) {
+        this.gameState = this.generateGameState(rowCount, columnCount);
     } 
 
-    generateGameState() {
-        let x = this.height;
-        let y = this.width;
-
+    generateGameState(rowCount, columnCount) {
         //We require a minimum of 2x2
-        if (x <= 1 || y <= 1) {
+        if (rowCount <= 1 || columnCount <= 1) {
             throw new Error('board must be a minimum of 2x2');
         }
     
-        let gameState = new Array(x);
-    
-        for (var i = 0; i < gameState.length; i++) {
-            gameState[i] = new Array(y);
+        let gameState = new Array(rowCount);
+        let row = 0;
+        let column = 0;
+
+        for (row = 0; row < gameState.length; row++) {
+            gameState[row] = new Array(columnCount);
         }
     
-        for (i = 0; i < x; i++) {
-            for (var j = 0; j < y; j++) {
-                gameState[i][j] = 2;
+        for (row = 0; row < gameState.length; row++) {
+            for (column = 0; column < gameState[row].length; column++) {
+                gameState[row][column] = 2;
             }
         }
     
@@ -32,11 +27,12 @@ export default class GameEngine {
     }
 
     processUpCommand() {
-        for (let i = 0; i < this.gameState.length; i++) {
-            for (var j = 0; j < this.gameState[i].length; j++) {
-                this.gameState[i][j]++;
+        for (let row = 0; row < this.gameState.length; row++) {
+            for (let column = 0; column < this.gameState[row].length; column++) {
+                this.gameState[row][column]++;
             }
         }
+        
         console.log("Up Command");
     }
 
