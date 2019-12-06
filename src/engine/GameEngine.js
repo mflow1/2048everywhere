@@ -3,8 +3,6 @@ export default class GameEngine {
         this.height = height;
         this.width = width;
         this.gameState = this.generateGameState();
-
-        //this.processUpCommand = this.processUpCommand.bind(this);
     } 
 
     generateGameState() {
