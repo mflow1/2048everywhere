@@ -1,6 +1,8 @@
 export default class GameEngine {
     constructor(rowCount, columnCount) {
         this.gameState = this.generateGameState(rowCount, columnCount);
+        this.generateNewTile();
+        this.generateNewTile();
     } 
 
     generateGameState(rowCount, columnCount) {
@@ -19,7 +21,7 @@ export default class GameEngine {
     
         for (row = 0; row < gameState.length; row++) {
             for (column = 0; column < gameState[row].length; column++) {
-                gameState[row][column] = 2;
+                gameState[row][column] = 0;
             }
         }
     
@@ -48,7 +50,7 @@ export default class GameEngine {
         //For up we process left to right, then down
         for (let row = 0; row < this.gameState.length; row++) {
             for (let column = 0; column < this.gameState[row].length; column++) {
-                if (this.gameState[row][column] === 0) {
+                if (this.gameState[row][column] === 0 && row !== this.gameState.length) {
                     //Find furthest piece down and bring it up
                     for (let nextRow = row+1; nextRow < this.gameState.length; nextRow++) {
                         if (this.gameState[nextRow][column] !== 0) {
@@ -56,12 +58,14 @@ export default class GameEngine {
                             this.gameState[row][column] = this.gameState[nextRow][column];
 
                             this.gameState[nextRow][column] = 0;
+                            break;
                         }
                     }
                 }
             }
         }
 
+        this.generateNewTile();
         console.log("Up Command");
     }
 
@@ -87,7 +91,7 @@ export default class GameEngine {
         //for down we process left to right then up
         for (let row = this.gameState.length - 1; row > -1; row--) {
             for (let column = 0; column < this.gameState[row].length; column++) {
-                if (this.gameState[row][column] === 0) {
+                if (this.gameState[row][column] === 0 && row !== 0) {
                     //Find furthest piece up and bring it down
                     for (let nextRow = row-1; nextRow > -1; nextRow--) {
                         if (this.gameState[nextRow][column] !== 0) {
@@ -96,10 +100,13 @@ export default class GameEngine {
 
                             this.gameState[nextRow][column] = 0;
                         }
+                        break;
                     }
                 }
             }
         }
+
+        this.generateNewTile();
         console.log("Down Command");
     }
 
@@ -125,7 +132,7 @@ export default class GameEngine {
         //for left we process left to right then down
         for (let row = 0; row < this.gameState.length; row++) {
             for (let column = 0; column < this.gameState[row].length; column++) {
-                if (this.gameState[row][column] === 0) {
+                if (this.gameState[row][column] === 0 && column !== this.gameState[row].length) {
                     //Find furthest piece right and bring it left
                     for (let nextColumn = column+1; nextColumn < this.gameState[row].length; nextColumn++) {
                         if (this.gameState[row][nextColumn] !== 0) {
@@ -133,11 +140,14 @@ export default class GameEngine {
                             this.gameState[row][column] = this.gameState[row][nextColumn];
 
                             this.gameState[row][nextColumn] = 0;
+                            break;
                         }
                     }
                 }
             }
         }
+
+        this.generateNewTile();
         console.log("Left Command");
     }
 
@@ -163,7 +173,7 @@ export default class GameEngine {
         //for right we process right to left then down
         for (let row = 0; row < this.gameState.length; row++) {
             for (let column = this.gameState[row].length - 1; column > -1; column--) {
-                if (this.gameState[row][column] === 0) {
+                if (this.gameState[row][column] === 0 && column !== 0) {
                     //Find furthest piece left and bring it right
                     for (let nextColumn = column-1; nextColumn > -1; nextColumn--) {
                         if (this.gameState[row][nextColumn] !== 0) {
@@ -171,11 +181,36 @@ export default class GameEngine {
                             this.gameState[row][column] = this.gameState[row][nextColumn];
 
                             this.gameState[row][nextColumn] = 0;
+                            break;
                         }
                     }
                 }
             }
         }
+
+        this.generateNewTile();
         console.log("Right Command");
+    }
+
+    generateNewTile() {
+        let blankTiles = [];
+        //For up we process left to right, then down
+        for (let row = 0; row < this.gameState.length; row++) {
+            for (let column = 0; column < this.gameState[row].length; column++) {
+                if (this.gameState[row][column] === 0) {
+                    blankTiles.push({row: row, column: column});
+                }
+            }
+        }
+
+        console.log(blankTiles.length);
+
+        if (blankTiles.length > 0){
+            let randSelection = Math.floor(Math.random() * blankTiles.length); 
+            this.gameState[blankTiles[randSelection].row][blankTiles[randSelection].column] = 2;
+        } else {
+            //LOSE
+        }
+
     }
 }
