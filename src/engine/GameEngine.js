@@ -1,8 +1,12 @@
 export default class GameEngine {
     constructor(rowCount, columnCount) {
-        this.gameState = this.generateGameState(rowCount, columnCount);
-        this.generateNewTile();
-        this.generateNewTile();
+        this.gameState = {};
+        this.gameMerges = {};
+        this.generateGameState(rowCount, columnCount);
+        this.gameState[0][0] = 2;
+        this.gameState[3][0] = 2;
+        //this.generateNewTile();
+        //this.generateNewTile();
     } 
 
     generateGameState(rowCount, columnCount) {
@@ -11,60 +15,90 @@ export default class GameEngine {
             throw new Error('board must be a minimum of 2x2');
         }
     
-        let gameState = new Array(rowCount);
+        this.gameState = new Array(rowCount);
+        this.gameMerges = new Array(rowCount);
         let row = 0;
         let column = 0;
 
-        for (row = 0; row < gameState.length; row++) {
-            gameState[row] = new Array(columnCount);
+        for (row = 0; row < this.gameState.length; row++) {
+            this.gameState[row] = new Array(columnCount);
+            this.gameMerges[row] = new Array(columnCount);
         }
     
-        for (row = 0; row < gameState.length; row++) {
-            for (column = 0; column < gameState[row].length; column++) {
-                gameState[row][column] = 0;
+        for (row = 0; row < this.gameState.length; row++) {
+            for (column = 0; column < this.gameState[row].length; column++) {
+                this.gameState[row][column] = 0;
+                this.gameMerges[row][column] = false;
             }
         }
-    
-        return gameState;
     }
 
     processUpCommand() {
-        //MERGE PIECES UP
+
         //For up we process left to right, then down
         for (let row = 0; row < this.gameState.length; row++) {
             for (let column = 0; column < this.gameState[row].length; column++) {
                 //We don't act upon top row
                 if (row !== 0) {
-                    //can we merge with piece above us?
-                    if (this.gameState[row][column] === this.gameState[row-1][column]) {
-                        //merge piece or combine with 0
-                        this.gameState[row-1][column] += this.gameState[row][column];
-                        //assign current piece to 0;
-                        this.gameState[row][column] = 0;
-                    }
-                }
-            }
-        }
-
-        //SLIDE PIECES UP
-        //For up we process left to right, then down
-        for (let row = 0; row < this.gameState.length; row++) {
-            for (let column = 0; column < this.gameState[row].length; column++) {
-                if (this.gameState[row][column] === 0 && row !== this.gameState.length) {
-                    //Find furthest piece down and bring it up
-                    for (let nextRow = row+1; nextRow < this.gameState.length; nextRow++) {
-                        if (this.gameState[nextRow][column] !== 0) {
-                            //Piece found
-                            this.gameState[row][column] = this.gameState[nextRow][column];
-
-                            this.gameState[nextRow][column] = 0;
-                            break;
+                    for (let rowIt = row; rowIt > 0; rowIt--) {
+                        //can we merge with piece above us or can we slide?
+                        if ((this.gameState[rowIt][column] === this.gameState[rowIt-1][column] && (this.gameMerges[rowIt][column] === false && this.gameMerges[rowIt-1][column] === false))) {
+                            //Assign game merges for that tile to true;
+                            this.gameMerges[rowIt][column] = true;                            
+                            //Assign game merges for that tile to true;
+                            this.gameMerges[rowIt-1][column] = true;
+                            //merge piece
+                            this.gameState[rowIt-1][column] += this.gameState[rowIt][column];
+                            //assign current piece to 0;
+                            this.gameState[rowIt][column] = 0;
+                        } else if (this.gameState[rowIt-1][column] === 0) {
+                            //combine with 0
+                            this.gameState[rowIt-1][column] += this.gameState[rowIt][column];
+                            //assign current piece to 0;
+                            this.gameState[rowIt][column] = 0;
                         }
                     }
                 }
             }
         }
 
+        //MERGE PIECES UP
+        //For up we process left to right, then down
+        // for (let row = 0; row < this.gameState.length; row++) {
+        //     for (let column = 0; column < this.gameState[row].length; column++) {
+        //         //We don't act upon top row
+        //         if (row !== 0) {
+        //             //can we merge with piece above us?
+        //             if (this.gameState[row][column] === this.gameState[row-1][column]) {
+        //                 //merge piece or combine with 0
+        //                 this.gameState[row-1][column] += this.gameState[row][column];
+        //                 //assign current piece to 0;
+        //                 this.gameState[row][column] = 0;
+        //             }
+        //         }
+        //     }
+        // }
+
+        // //SLIDE PIECES UP
+        // //For up we process left to right, then down
+        // for (let row = 0; row < this.gameState.length; row++) {
+        //     for (let column = 0; column < this.gameState[row].length; column++) {
+        //         if (this.gameState[row][column] === 0 && row !== this.gameState.length) {
+        //             //Find furthest piece down and bring it up
+        //             for (let nextRow = row+1; nextRow < this.gameState.length; nextRow++) {
+        //                 if (this.gameState[nextRow][column] !== 0) {
+        //                     //Piece found
+        //                     this.gameState[row][column] = this.gameState[nextRow][column];
+
+        //                     this.gameState[nextRow][column] = 0;
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        this.resetGameMerges();
         this.generateNewTile();
         console.log("Up Command");
     }
@@ -212,5 +246,13 @@ export default class GameEngine {
             //LOSE
         }
 
+    }
+
+    resetGameMerges() {
+        for (let row = 0; row < this.gameState.length; row++) {
+            for (let column = 0; column < this.gameState[row].length; column++) {
+                this.gameMerges[row][column] = false;
+            }
+        }
     }
 }
