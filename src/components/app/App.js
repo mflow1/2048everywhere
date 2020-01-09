@@ -3,13 +3,14 @@ import './App.css';
 import Title from '../title/Title';
 import Board from '../board/Board';
 import GameEngine from '../../engine/GameEngine';
+import { AlternateGameState, AlternateGameEngine } from '../../engine/alternateGameEngine';
 
 export default class App extends React.Component {
   constructor() {
     super();
-    this.gameEngine = new GameEngine(4,4);
+    this.gameEngine = new AlternateGameEngine();
 
-    this.state = { gameState: this.gameEngine.gameState }
+    this.state = { gameState: this.gameEngine.tiles }
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
@@ -26,7 +27,7 @@ export default class App extends React.Component {
     console.log(event.key);
     if (event.key === 'ArrowUp') {
       this.gameEngine.processUpCommand();
-      console.log(this.gameEngine.gameState);
+      console.log(this.gameEngine.tiles);
     } else if (event.key === 'ArrowDown') {
       this.gameEngine.processDownCommand();
     } else if (event.key === 'ArrowLeft') {
@@ -34,7 +35,7 @@ export default class App extends React.Component {
     } else if (event.key === 'ArrowRight') {
       this.gameEngine.processRightCommand();
     }
-    this.setState({ gameState: this.gameEngine.gameState });
+    this.setState({ gameState: this.gameEngine.tiles });
   };
 
 
