@@ -8,7 +8,10 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.gameEngine = new GameEngine(4,4);
-    this.gameBoard = <Board gameState={this.gameEngine.gameState}/>;
+
+    this.state = { gameState: this.gameEngine.gameState }
+
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   componentDidMount() {
@@ -22,14 +25,16 @@ export default class App extends React.Component {
   handleKeyDown(event) {
     console.log(event.key);
     if (event.key === 'ArrowUp') {
-      console.log('processUp()');
+      this.gameEngine.processUpCommand();
+      console.log(this.gameEngine.gameState);
     } else if (event.key === 'ArrowDown') {
-      console.log('processDown()');
+      this.gameEngine.processDownCommand();
     } else if (event.key === 'ArrowLeft') {
-      console.log('processLeft()');
+      this.gameEngine.processLeftCommand();
     } else if (event.key === 'ArrowRight') {
-      console.log('processRight()');
+      this.gameEngine.processRightCommand();
     }
+    this.setState({ gameState: this.gameEngine.gameState });
   };
 
 
@@ -37,7 +42,7 @@ export default class App extends React.Component {
     return  <div className="App">
               <header className="App-header">
                 <Title/>
-                {this.gameBoard}
+                <Board gameState={this.state.gameState}/>
               </header>
             </div>
   }

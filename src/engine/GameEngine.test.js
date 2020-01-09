@@ -3,14 +3,16 @@ import GameEngine from './GameEngine'
 describe('GameEngineTests', () => {
     describe('Constructor tests', ()=> {
         it('constructor makes a n x n Array when above 2x2', () => {
-            let x = Math.floor(Math.random() * 9) + 2;
-            let y = Math.floor(Math.random() * 9) + 2;
+            let rowCount = Math.floor(Math.random() * 9) + 2;
+            let columnCount = Math.floor(Math.random() * 9) + 2;
 
-            let gameEngine = new GameEngine(x, y);
+            let gameEngine = new GameEngine(rowCount, columnCount);
             let array = gameEngine.gameState;
             
-            expect(array.length).toBe(x);
-            expect(array[0].length).toBe(y);
+            expect(array.length).toBe(rowCount);
+            for (let row = 0; row < array.length; row++) {
+                expect(array[row].length).toBe(columnCount);
+            }
         });
     
         it('GameEngine constructor throws when passed less and 2x2', () => {
